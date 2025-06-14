@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router';
-import { newSequencePageRoute } from '@/pages/sequence/Sequence.route.tsx';
+import { newSequencePageRoute } from '@/pages/new-sequence/NewSequence.route.tsx';
 
 const router = createBrowserRouter([newSequencePageRoute]);
 
