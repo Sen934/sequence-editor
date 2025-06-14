@@ -25,7 +25,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
           const primaryBgClass = isNotStarted ? 'bg-gray-200' : 'bg-purple-500';
           const primaryBorderClass = isNotStarted
             ? 'border-gray-200'
-            : 'bg-purple-500';
+            : 'border-purple-500';
 
           return (
             <div
@@ -35,9 +35,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
               {/* Line Connector */}
               {index !== 0 && (
                 <div
-                  className={`absolute top-3 right-50 w-full h-0.5 z-0 ${
-                    primaryBgClass
-                  }`}
+                  className={`absolute top-3 left-0 -translate-x-1/2 w-full h-0.5 z-0 ${primaryBgClass}`}
                 />
               )}
 
