@@ -1,4 +1,4 @@
-import { SequenceStepper } from '@/widgets/sequence-stepper/SequenceStepper.ui.tsx';
+import { SequenceStepper } from '@/widgets/sequence-stepper/ui/SequenceStepper.ui.tsx';
 
 export function NewSequencePage() {
   return (

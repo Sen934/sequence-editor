@@ -1,12 +1,8 @@
 import React from 'react';
-
-type Step = {
-  title: string;
-  subTitle: string;
-};
+import type { ProgressBarStep } from '@/shared/ui/ProgressBar.types.ts';
 
 type ProgressBarProps = {
-  steps: Step[];
+  steps: ProgressBarStep[];
   currentStepIndex: number;
 };
 
