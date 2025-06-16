@@ -1,4 +1,4 @@
-import type { StepComponent } from '@/widgets/sequence-stepper/SequenceStepper.types.ts';
+import type { StepComponent } from '@/features/create-sequence/create-sequence.types.ts';
 
 const NameProductStep: StepComponent = () => {
   return <div>NameProductStep</div>;
