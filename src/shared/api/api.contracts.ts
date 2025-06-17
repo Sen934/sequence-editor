@@ -4,7 +4,7 @@ export const CreateSequenceDtoSchema = z.object({
   sequence: z.object({
     name: z.string(),
     productId: z.string(),
-    step: z.array(
+    steps: z.array(
       z.object({
         subject: z.string(),
         content: z.string(),
