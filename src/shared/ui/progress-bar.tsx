@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ProgressBarStep } from '@/shared/ui/ProgressBar.types.ts';
+import type { ProgressBarStep } from '@/shared/ui/progress-bar.ts';
 
 type ProgressBarProps = {
   steps: ProgressBarStep[];

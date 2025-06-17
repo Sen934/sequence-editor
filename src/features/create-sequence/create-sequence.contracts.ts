@@ -9,6 +9,6 @@ export const CreateSequenceSchema = z.object({
   name: z.string().min(1, 'Sequence name should contain at least 1 letter'),
   productId: z
     .string()
-    .min(1, 'Sequence name should contain at least 1 letter'),
+    .min(1, 'Sequence product id should contain at least 1 letter'),
   steps: z.array(CreateSequenceStepSchema),
 });

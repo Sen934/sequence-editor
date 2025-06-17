@@ -1,12 +1,13 @@
 import React from 'react';
-import { ProgressBar } from '@/shared/ui/ProgressBar.ui.tsx';
-import { NameProductStep } from '@/features/create-sequence/ui/NameProductStep.ui.tsx';
+import { ProgressBar } from '@/shared/ui/progress-bar.tsx';
+import { NameProductStep } from '@/features/create-sequence/ui/name-product-step.tsx';
 import type {
   CreateSequence,
   SequenceStep,
 } from '@/features/create-sequence/create-sequence.types.ts';
 import { mapSequenceStepsToProgressBarSteps } from '@/features/create-sequence/create-sequence.lib.ts';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
+import { type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateSequenceSchema } from '@/features/create-sequence/create-sequence.contracts.ts';
 
@@ -32,7 +33,7 @@ const progressBarSteps = mapSequenceStepsToProgressBarSteps(steps);
 
 const SequenceStepper: React.FC = () => {
   const [currentStep, setCurrentStep] = React.useState<number>(0);
-  const { handleSubmit } = useForm<CreateSequence>({
+  const methods = useForm<CreateSequence>({
     mode: 'onTouched',
     resolver: zodResolver(CreateSequenceSchema),
     defaultValues: { name: '', productId: '', steps: [] },
@@ -43,10 +44,17 @@ const SequenceStepper: React.FC = () => {
   const StepComponent = steps[currentStep]?.component;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ProgressBar steps={progressBarSteps} currentStepIndex={1} />
-      <StepComponent onNext={() => setCurrentStep((prev) => prev + 1)} />
-    </form>
+    <FormProvider {...methods}>
+      <form
+        className="flex flex-col gap-8"
+        onSubmit={methods.handleSubmit(onSubmit)}
+      >
+        <ProgressBar steps={progressBarSteps} currentStepIndex={currentStep} />
+        <StepComponent onNext={() => setCurrentStep((prev) => prev + 1)} />
+
+        <button type="submit">Submit</button>
+      </form>
+    </FormProvider>
   );
 };
 

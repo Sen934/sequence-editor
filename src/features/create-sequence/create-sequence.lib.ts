@@ -2,7 +2,7 @@ import type {
   CreateSequence,
   SequenceStep,
 } from '@/features/create-sequence/create-sequence.types.ts';
-import type { ProgressBarStep } from '@/shared/ui/ProgressBar.types.ts';
+import type { ProgressBarStep } from '@/shared/ui/progress-bar.ts';
 import type { CreateSequenceDto } from '@/shared/api/api.types.ts';
 
 const mapSequenceStepsToProgressBarSteps = (
