@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateSequenceSchema } from '@/features/create-sequence/create-sequence.contracts.ts';
+import { CreateSequenceFormSchema } from '@/features/create-sequence/create-sequence.contracts.ts';
 import { z } from 'zod';
 
 type StepComponentProps = {
@@ -14,6 +14,6 @@ type SequenceStep = {
   component: StepComponent;
 };
 
-type CreateSequence = z.infer<typeof CreateSequenceSchema>;
+type CreateSequenceForm = z.infer<typeof CreateSequenceFormSchema>;
 
-export type { SequenceStep, StepComponent, CreateSequence };
+export type { SequenceStep, StepComponent, CreateSequenceForm };

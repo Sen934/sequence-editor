@@ -11,7 +11,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   currentStepIndex,
 }) => {
   return (
-    <div className="w-full">
+    <div className="w-full" data-testid="progress-bar">
       <div className="flex items-center justify-between w-full">
         {steps.map((step, index) => {
           const isCurrent = currentStepIndex === index;
@@ -66,6 +66,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
               <div className="text-center mt-3">
                 <div
                   className={`text-sm font-medium ${isCurrent ? 'text-purple-700' : 'text-gray-700'}`}
+                  data-is-current={isCurrent}
                 >
                   {step.title}
                 </div>

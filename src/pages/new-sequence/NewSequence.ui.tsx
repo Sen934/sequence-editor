@@ -1,4 +1,4 @@
-import { SequenceStepper } from '@/features/create-sequence/ui/create-sequence.ui.tsx';
+import { CreateSequence } from '@/features/create-sequence/ui/create-sequence.ui.tsx';
 
 export function NewSequencePage() {
   return (
@@ -7,7 +7,7 @@ export function NewSequencePage() {
         <h2 className="text-gray-900 font-semibold text-3xl">New sequence</h2>
       </header>
       <main>
-        <SequenceStepper />
+        <CreateSequence />
       </main>
     </div>
   );

@@ -1,5 +1,5 @@
 import type {
-  CreateSequence,
+  CreateSequenceForm,
   SequenceStep,
 } from '@/features/create-sequence/create-sequence.types.ts';
 import type { ProgressBarStep } from '@/shared/ui/progress-bar.types.ts';
@@ -14,7 +14,7 @@ const mapSequenceStepsToProgressBarSteps = (
   }));
 
 const transformCreateSequenceToCreateSequenceDto = (
-  createSequence: CreateSequence,
+  createSequence: CreateSequenceForm,
 ): CreateSequenceDto => ({ sequence: createSequence });
 
 export {

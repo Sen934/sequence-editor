@@ -5,7 +5,7 @@ const CreateSequenceStepSchema = z.object({
   content: z.string().min(1, 'Subject should contain at least 1 letter'),
 });
 
-export const CreateSequenceSchema = z.object({
+export const CreateSequenceFormSchema = z.object({
   name: z.string().min(1, 'Sequence name should contain at least 1 letter'),
   productId: z
     .string()

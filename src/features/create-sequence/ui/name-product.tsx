@@ -1,12 +1,12 @@
 import type {
-  CreateSequence,
+  CreateSequenceForm,
   StepComponent,
 } from '@/features/create-sequence/create-sequence.types.ts';
 import { useFormContext } from 'react-hook-form';
 import { FormInput } from '@/shared/ui/form-input.ui.tsx';
 
 const NameProductStep: StepComponent = ({ onNext }) => {
-  const { trigger } = useFormContext<CreateSequence>();
+  const { trigger } = useFormContext<CreateSequenceForm>();
 
   const handleNext = async () => {
     const isValid = await trigger(['name', 'productId']);
@@ -36,8 +36,16 @@ const NameProductStep: StepComponent = ({ onNext }) => {
         </button>
       </div>
       <div className="border border-gray-200 rounded-lg px-4 py-5">
-        <FormInput<CreateSequence> namePath="name" label="Name" />
-        <FormInput<CreateSequence> namePath="productId" label="Product id" />
+        <FormInput<CreateSequenceForm>
+          namePath="name"
+          label="Name"
+          data-testid="name-input"
+        />
+        <FormInput<CreateSequenceForm>
+          namePath="productId"
+          label="Product id"
+          data-testid="product-id-input"
+        />
       </div>
     </>
   );
