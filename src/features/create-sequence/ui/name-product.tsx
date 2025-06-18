@@ -21,10 +21,10 @@ const NameProductStep: StepComponent = ({ onNext }) => {
       <div className="border-bottom flex justify-between items-center">
         <div className="mb-6">
           <h2 className="text-lg font-semibold text-gray-900">
-            Sequence steps
+            Name & Product
           </h2>
           <p className="text-sm text-gray-500">
-            Create steps for your sequence
+            Provide sequence name & product
           </p>
         </div>
 
