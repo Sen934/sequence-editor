@@ -10,6 +10,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateSequenceFormSchema } from '@/features/create-sequence/create-sequence.contracts.ts';
+import { SequenceSteps } from '@/features/create-sequence/ui/sequence-steps.tsx';
 
 const steps: SequenceStep[] = [
   {
@@ -20,7 +21,7 @@ const steps: SequenceStep[] = [
   {
     title: 'Sequence steps',
     subTitle: 'Create sequence steps for your sequence',
-    component: () => <></>,
+    component: SequenceSteps,
   },
   {
     title: 'Summary',
@@ -32,11 +33,16 @@ const steps: SequenceStep[] = [
 const progressBarSteps = mapSequenceStepsToProgressBarSteps(steps);
 
 const CreateSequence: React.FC = () => {
-  const [currentStep, setCurrentStep] = React.useState<number>(0);
+  // TODO: Set 0
+  const [currentStep, setCurrentStep] = React.useState<number>(1);
   const methods = useForm<CreateSequenceForm>({
     mode: 'onTouched',
     resolver: zodResolver(CreateSequenceFormSchema),
-    defaultValues: { name: '', productId: '', steps: [] },
+    defaultValues: {
+      name: '',
+      productId: '',
+      steps: [{ subject: '', content: '', daysToWait: 0 }],
+    },
   });
 
   const onSubmit: SubmitHandler<CreateSequenceForm> = (data) =>
@@ -51,7 +57,18 @@ const CreateSequence: React.FC = () => {
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         <ProgressBar steps={progressBarSteps} currentStepIndex={currentStep} />
-        <StepComponent onNext={() => setCurrentStep((prev) => prev + 1)} />
+        <StepComponent
+          onNext={
+            currentStep < steps.length - 1
+              ? () => setCurrentStep((prev) => prev + 1)
+              : undefined
+          }
+          onPrev={
+            currentStep > 0
+              ? () => setCurrentStep((prev) => prev - 1)
+              : undefined
+          }
+        />
       </form>
     </FormProvider>
   );

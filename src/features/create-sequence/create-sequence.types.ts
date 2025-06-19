@@ -3,7 +3,8 @@ import { CreateSequenceFormSchema } from '@/features/create-sequence/create-sequ
 import { z } from 'zod';
 
 type StepComponentProps = {
-  onNext: () => void;
+  onNext?: () => void;
+  onPrev?: () => void;
 };
 
 type StepComponent = React.FC<StepComponentProps>;

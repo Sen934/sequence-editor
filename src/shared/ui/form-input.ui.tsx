@@ -9,7 +9,8 @@ type FormInputProps<TFieldValues extends FieldValues> = {
   >;
   'data-testid'?: string;
   namePath: Path<TFieldValues>;
-  label: string;
+  label?: string;
+  className?: string;
 };
 
 function FormInput<TFieldValues extends FieldValues>(
@@ -23,18 +24,21 @@ function FormInput<TFieldValues extends FieldValues>(
   const error = get(errors, props.namePath);
 
   return (
-    <div>
-      <label className="block text-sm font-medium text-gray-700">
-        {props.label}
-      </label>
+    <div className={props.className} data-testid={props['data-testid']}>
+      {props.label && (
+        <label className="block text-sm font-medium text-gray-700">
+          {props.label}
+        </label>
+      )}
       <input
-        className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
         {...field}
         {...props.inputProps}
-        data-testid={props['data-testid']}
+        className={`mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200 ${props.inputProps?.className ?? ''}`}
       />
       {error && (
-        <p className="mt-1 text-sm text-red-600">{String(error?.message)}</p>
+        <p className="mt-1 text-sm text-red-600" data-testid="error-message">
+          {String(error?.message)}
+        </p>
       )}
     </div>
   );

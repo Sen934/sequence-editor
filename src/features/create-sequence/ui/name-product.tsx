@@ -11,14 +11,17 @@ const NameProductStep: StepComponent = ({ onNext }) => {
   const handleNext = async () => {
     const isValid = await trigger(['name', 'productId']);
 
-    if (isValid) {
+    if (isValid && onNext) {
       onNext();
     }
   };
 
   return (
     <>
-      <div className="border-bottom flex justify-between items-center">
+      <div
+        className="border-0 border-b border-gray-200 flex justify-between items-center"
+        data-testid="name-product-form"
+      >
         <div className="mb-6">
           <h2 className="text-lg font-semibold text-gray-900">
             Name & Product
@@ -39,12 +42,12 @@ const NameProductStep: StepComponent = ({ onNext }) => {
         <FormInput<CreateSequenceForm>
           namePath="name"
           label="Name"
-          data-testid="name-input"
+          data-testid="name"
         />
         <FormInput<CreateSequenceForm>
           namePath="productId"
           label="Product id"
-          data-testid="product-id-input"
+          data-testid="product-id"
         />
       </div>
     </>
