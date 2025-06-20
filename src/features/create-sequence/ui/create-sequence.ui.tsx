@@ -11,6 +11,7 @@ import { type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateSequenceFormSchema } from '@/features/create-sequence/create-sequence.contracts.ts';
 import { SequenceStepsUi } from '@/features/create-sequence/ui/sequence-steps.ui.tsx';
+import { Summary } from '@/features/create-sequence/ui/summary.ui.tsx';
 
 const steps: SequenceStep[] = [
   {
@@ -26,15 +27,14 @@ const steps: SequenceStep[] = [
   {
     title: 'Summary',
     subTitle: 'Summary of your sequence',
-    component: () => <></>,
+    component: Summary,
   },
 ];
 
 const progressBarSteps = mapSequenceStepsToProgressBarSteps(steps);
 
 const CreateSequence: React.FC = () => {
-  // TODO: Set 0
-  const [currentStep, setCurrentStep] = React.useState<number>(1);
+  const [currentStep, setCurrentStep] = React.useState<number>(0);
   const methods = useForm<CreateSequenceForm>({
     mode: 'onTouched',
     resolver: zodResolver(CreateSequenceFormSchema),
