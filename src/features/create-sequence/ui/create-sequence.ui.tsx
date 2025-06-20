@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateSequenceFormSchema } from '@/features/create-sequence/create-sequence.contracts.ts';
 import { SequenceStepsUi } from '@/features/create-sequence/ui/sequence-steps.ui.tsx';
 import { Summary } from '@/features/create-sequence/ui/summary.ui.tsx';
+import { useCreateSequenceMutation } from '@/features/create-sequence/create-sequence.mutation.ts';
 
 const steps: SequenceStep[] = [
   {
@@ -35,6 +36,17 @@ const progressBarSteps = mapSequenceStepsToProgressBarSteps(steps);
 
 const CreateSequence: React.FC = () => {
   const [currentStep, setCurrentStep] = React.useState<number>(0);
+
+  const { mutate } = useCreateSequenceMutation({
+    onSuccess: (sequence) => {
+      //TODO: navigate somewhere for e,.g.
+      console.log(sequence, 'Form submitted');
+    },
+    onError: () => {
+      console.log('error');
+      // TODO: show some notification
+    },
+  });
   const methods = useForm<CreateSequenceForm>({
     mode: 'onTouched',
     resolver: zodResolver(CreateSequenceFormSchema),
@@ -45,8 +57,7 @@ const CreateSequence: React.FC = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<CreateSequenceForm> = (data) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<CreateSequenceForm> = (data) => mutate(data);
 
   const StepComponent = steps[currentStep]?.component;
 
