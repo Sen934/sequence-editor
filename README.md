@@ -6,7 +6,7 @@
 4. `npm run dev`
 
 # Notes
-1.  The project is motivated by FSD methodology (https://feature-sliced.github.io/documentation/docs)
+1.  Motivated by FSD methodology (https://feature-sliced.github.io/documentation/docs)
 2.  I didn't try to implement the exact functional requirements or a pixel perfect design. The goal was to show how i code and i hope you like it.
 3. There is no GET request, but if you open pages, you'd see how i'd like to handle them and i've shown how i'd handle api in general.
 4. I didn't investigate the best option for Rich text editor. I've chosen the one with quicker setup, which unfortunately wasn't quick. I would probably chose some editor with markdown syntax if possible, because it's much safer
