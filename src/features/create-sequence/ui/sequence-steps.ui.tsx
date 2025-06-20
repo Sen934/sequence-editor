@@ -2,20 +2,31 @@ import type {
   CreateSequenceForm,
   StepComponent,
 } from '@/features/create-sequence/create-sequence.types.ts';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import { ReactComponent as MailIcon } from '@/shared/assets/mail.svg';
 import { FormInput } from '@/shared/ui/form-input.ui.tsx';
+import { RichTextEditor } from '@/shared/ui/rich-text-editor.ui.tsx';
 
-const SequenceSteps: StepComponent = ({ onNext, onPrev }) => {
+const SequenceStepsUi: StepComponent = ({ onNext, onPrev }) => {
   const { trigger } = useFormContext<CreateSequenceForm>();
 
-  const { fields } = useFieldArray<CreateSequenceForm>({ name: 'steps' });
+  const { fields, append } = useFieldArray<CreateSequenceForm>({
+    name: 'steps',
+  });
 
   const handleNext = async () => {
     const isValid = await trigger(['steps']);
 
     if (isValid && onNext) {
       onNext?.();
+    }
+  };
+
+  const handleAddNextStep = async () => {
+    const isValid = await trigger(['steps']);
+
+    if (isValid) {
+      append({ subject: '', content: '' });
     }
   };
 
@@ -49,11 +60,15 @@ const SequenceSteps: StepComponent = ({ onNext, onPrev }) => {
           </button>
         </div>
       </div>
-      {fields.map((field, index) => {
-        const isInitialStep = field.daysToWait === 0;
+      {fields.map((stepField, index) => {
+        const isInitialStep = index === 0;
 
         return (
-          <section key={field.id} className="border border-gray-200 rounded-lg">
+          <section
+            key={stepField.id}
+            className="border border-gray-200 rounded-lg"
+            data-testid={`sequence-steps-form-step-${index}`}
+          >
             <header className="flex justify-between px-4 py-5 border-b border-gray-200">
               <h4
                 className="text-base font-medium text-gray-900 inline-flex items-center"
@@ -70,15 +85,46 @@ const SequenceSteps: StepComponent = ({ onNext, onPrev }) => {
               namePath={`steps.${index}.subject`}
               data-testid={`sequence-steps-form-step-${index}-subject`}
               inputProps={{
-                placeholder: 'Subject',
+                placeholder: isInitialStep
+                  ? 'Subject'
+                  : "Leave empty to use previous step' subject",
                 className: 'border-0 focus:ring-0',
               }}
+            />
+
+            <Controller
+              name={`steps.${index}.content`}
+              render={({
+                field: contentField,
+                fieldState: contentFieldState,
+              }) => (
+                <div className="h-50">
+                  <RichTextEditor
+                    id={stepField.id}
+                    value={contentField.value}
+                    onChange={contentField.onChange}
+                  />
+                  {contentFieldState.error && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {contentFieldState.error.message}
+                    </p>
+                  )}
+                </div>
+              )}
             />
           </section>
         );
       })}
+
+      <button
+        onClick={handleAddNextStep}
+        data-testid="add-new-step-button"
+        className="self-center flex items-center gap-1 px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50 w-fit cursor-pointer"
+      >
+        <span className="text-lg">+</span> Add new step
+      </button>
     </>
   );
 };
 
-export { SequenceSteps };
+export { SequenceStepsUi };

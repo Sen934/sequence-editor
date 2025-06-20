@@ -10,7 +10,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateSequenceFormSchema } from '@/features/create-sequence/create-sequence.contracts.ts';
-import { SequenceSteps } from '@/features/create-sequence/ui/sequence-steps.tsx';
+import { SequenceStepsUi } from '@/features/create-sequence/ui/sequence-steps.ui.tsx';
 
 const steps: SequenceStep[] = [
   {
@@ -21,7 +21,7 @@ const steps: SequenceStep[] = [
   {
     title: 'Sequence steps',
     subTitle: 'Create sequence steps for your sequence',
-    component: SequenceSteps,
+    component: SequenceStepsUi,
   },
   {
     title: 'Summary',
@@ -41,7 +41,7 @@ const CreateSequence: React.FC = () => {
     defaultValues: {
       name: '',
       productId: '',
-      steps: [{ subject: '', content: '', daysToWait: 0 }],
+      steps: [{ subject: '', content: '' }],
     },
   });
 
@@ -53,7 +53,7 @@ const CreateSequence: React.FC = () => {
   return (
     <FormProvider {...methods}>
       <form
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-8 justify-center"
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         <ProgressBar steps={progressBarSteps} currentStepIndex={currentStep} />
