@@ -63,7 +63,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
               </div>
 
               {/* Labels */}
-              <div className="text-center mt-3">
+              <div className="text-center mt-3 hidden lg:block">
                 <div
                   className={`text-sm font-medium ${isCurrent ? 'text-purple-700' : 'text-gray-700'}`}
                   data-is-current={isCurrent}
@@ -71,7 +71,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
                   {step.title}
                 </div>
                 <div
-                  className={`text-xs ${isCurrent ? 'text-purple-500' : 'text-gray-400'}`}
+                  className={`text-xs text-wrap ${isCurrent ? 'text-purple-500' : 'text-gray-400'}`}
                 >
                   {step.subTitle}
                 </div>

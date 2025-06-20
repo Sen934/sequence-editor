@@ -71,7 +71,7 @@ const Summary: StepComponent = ({ onPrev }) => {
               </div>
               <div className="text-sm text-gray-700">
                 <p>Subject: {step.subject}</p>
-                <p>Content: {step.content}</p>
+                <div dangerouslySetInnerHTML={{ __html: step.content }} />
               </div>
             </div>
           ))}

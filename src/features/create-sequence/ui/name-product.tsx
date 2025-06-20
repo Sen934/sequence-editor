@@ -38,7 +38,7 @@ const NameProductStep: StepComponent = ({ onNext }) => {
           Next
         </button>
       </div>
-      <div className="border border-gray-200 rounded-lg px-4 py-5">
+      <div className="border border-gray-200 rounded-lg px-4 py-5 flex flex-col gap-4">
         <FormInput<CreateSequenceForm>
           namePath="name"
           label="Name"
