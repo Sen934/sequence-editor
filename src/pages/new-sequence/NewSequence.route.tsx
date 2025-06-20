@@ -8,7 +8,7 @@ export const newSequencePageRoute: RouteObject = {
       import('./NewSequence.loader.ts').then(
         (module) => module.newSequencePageLoader,
       ),
-      import('./NewSequence.ui.tsx').then((module) => module.NewSequencePage),
+      import('./NewSequence.ui.tsx').then((module) => module.default),
     ]);
     return { loader, Component };
   },

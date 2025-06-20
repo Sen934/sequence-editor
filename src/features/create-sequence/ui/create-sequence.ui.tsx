@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProgressBar } from '@/shared/ui/progress-bar.ui.tsx';
+import { ProgressBar } from '@/shared/ui/progress-bar/progress-bar.ui.tsx';
 import { NameProductStep } from '@/features/create-sequence/ui/name-product.tsx';
 import type {
   CreateSequenceForm,
